@@ -66,7 +66,7 @@ class RecipesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
 
             // on click launch recipe details activity
-            holder.itemView.setOnClickListener { mView ->
+            holder.itemView.setOnClickListener {
                 val intent = Intent(context, RecipeActivity::class.java)
                 intent.putExtra(RECIPE, recipe)
                 context.startActivity(intent)
