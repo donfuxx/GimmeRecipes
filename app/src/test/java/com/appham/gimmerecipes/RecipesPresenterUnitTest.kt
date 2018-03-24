@@ -49,4 +49,6 @@ class RecipesPresenterUnitTest {
         verify(mPresenter).callRecipes("thai")
 
     }
+
+    //TODO: add more tests, maybe implement dependency injection framework like dagger2
 }

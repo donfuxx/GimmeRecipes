@@ -53,39 +53,14 @@ class RecipesListFragment : Fragment(), MvpContract.View, Queryable {
         recipesListView.adapter = recipesAdapter
 
         // delete recipes item from list by swipe right
-        val simpleItemTouchCallback = object : ItemTouchHelper.SimpleCallback(0,
-                ItemTouchHelper.RIGHT) {
-
-            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
-                return false
-            }
-
-
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-
-                //TODO: also delete from backend db
-                Toast.makeText(activity,
-                        R.string.delete_not_yet, Toast.LENGTH_LONG).show()
-
-                val pos = viewHolder.adapterPosition
-                recipesAdapter.recipesList.recipes?.removeAt(pos)
-                recipesAdapter.notifyItemRemoved(pos)
-            }
-        }
+        val simpleItemTouchCallback = createSwipeCallback()
         ItemTouchHelper(simpleItemTouchCallback).attachToRecyclerView(recipesListView)
 
         progressBar = view.findViewById(R.id.progressBarList)
 
-//        val btnRefresh: FloatingActionButton? = view.findViewById(R.id.btnRefresh)
-//        btnRefresh?.setOnClickListener({ _ ->
-//            refreshRecipes(RecipesList())
-//            presenter.callRecipes()
-//        })
-
-        if (savedInstanceState != null) {
-            refreshRecipes(savedInstanceState.getParcelable<Parcelable>(RECIPES_LIST) as RecipesList)
-//        } else {
-//            presenter.callRecipes()
+        // restore recipes list if there is a saved instance state
+        savedInstanceState?.let {
+            refreshRecipes(it.getParcelable<Parcelable>(RECIPES_LIST) as RecipesList)
         }
 
         super.onViewCreated(view, savedInstanceState)
@@ -122,7 +97,7 @@ class RecipesListFragment : Fragment(), MvpContract.View, Queryable {
     //endregion
 
     override fun query(q: String) {
-        presenter.callRecipes()
+        presenter.callRecipes(q)
     }
 
     private fun addQueryFragment() {
@@ -133,6 +108,31 @@ class RecipesListFragment : Fragment(), MvpContract.View, Queryable {
             childFragmentManager.beginTransaction()
                     .add(R.id.frameQuery, queryFragment, QueryFragment.TAG)
                     .commit()
+        }
+    }
+
+    /**
+     * Create a callback to delete list items on swipe right
+     */
+    private fun createSwipeCallback(): ItemTouchHelper.SimpleCallback {
+        return object : ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.RIGHT) {
+
+            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+                return false
+            }
+
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+
+                //TODO: also delete from backend db
+                showToast(getString(R.string.delete_not_yet),
+                        Toast.LENGTH_LONG)
+
+                val pos = viewHolder.adapterPosition
+                recipesAdapter.recipesList.recipes?.removeAt(pos)
+                recipesAdapter.notifyItemRemoved(pos)
+            }
         }
     }
 

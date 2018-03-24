@@ -25,7 +25,6 @@ class QueryFragment : Fragment(), MvpContract.View, Queryable, Talkable {
     lateinit var presenter: MvpContract.Presenter
 
     companion object {
-
         val TAG = "query-fragment"
     }
 
@@ -37,11 +36,10 @@ class QueryFragment : Fragment(), MvpContract.View, Queryable, Talkable {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val editQuery: EditText? = view.findViewById(R.id.editQuery)
-        editQuery?.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+        editQuery?.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 refreshRecipes(RecipesList())
-//                presenter.callRecipes(v.text.toString())
-                presenter.callWit(v.text.toString())
+                query(v.text.toString())
                 return@OnEditorActionListener true
             }
             false
@@ -70,7 +68,7 @@ class QueryFragment : Fragment(), MvpContract.View, Queryable, Talkable {
     }
 
     override fun query(q: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        presenter.callWit(q)
     }
 
     override fun refreshRecipes(recipesList: RecipesList) {
