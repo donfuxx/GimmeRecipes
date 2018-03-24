@@ -68,6 +68,7 @@ class RecipesPresenter(val mView: MvpContract.View) : MvpContract.Presenter {
      * Call recipes API by query after Wit API call finished with success.
      * @param recipesList
      */
+    @UiThread
     override fun onNext(wit: WitResponse) {
         mView.showLoadingBar(false)
 
