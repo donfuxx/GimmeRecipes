@@ -114,11 +114,11 @@ class RecipesListFragment : Fragment(), MvpContract.View, Queryable {
     }
 
     /**
-     * Create a callback to delete list items on swipe right
+     * Create a callback to delete list items on swipe
      */
     private fun createSwipeCallback(): ItemTouchHelper.SimpleCallback {
         return object : ItemTouchHelper.SimpleCallback(0,
-                ItemTouchHelper.RIGHT) {
+                ItemTouchHelper.RIGHT or ItemTouchHelper.LEFT) {
 
             override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
                 return false
