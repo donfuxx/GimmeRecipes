@@ -3,9 +3,9 @@ package com.appham.gimmerecipes
 import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.IdlingRegistry
-import android.support.test.espresso.action.ViewActions.pressImeActionButton
-import android.support.test.espresso.action.ViewActions.typeText
+import android.support.test.espresso.action.ViewActions.*
 import android.support.test.espresso.assertion.ViewAssertions.matches
+import android.support.test.espresso.contrib.RecyclerViewActions
 import android.support.test.espresso.contrib.RecyclerViewActions.scrollToPosition
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
@@ -81,5 +81,19 @@ class RecipesListTest {
         onView(withId(R.id.listRecipes))
                 .perform(scrollToPosition<RecyclerView.ViewHolder>(0))
                 .check(matches(atPosition(0, hasDescendant(withText(containsString("Pad Thai"))))))
+    }
+
+    @Test
+    fun testClickRecipeOpensDetails() {
+        onView(withId(R.id.editQuery)).perform(typeText("I really need a pizza!"))
+        onView(withId(R.id.editQuery)).perform(pressImeActionButton())
+
+        // click first recipe item
+        onView(withId(R.id.listRecipes)).perform(
+                RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(1,
+                        click()))
+
+        // check if details page displayed
+        onView(withId(R.id.imgRecipeDetails)).check(matches(isDisplayed()))
     }
 }
