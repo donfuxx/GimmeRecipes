@@ -1,8 +1,6 @@
-package com.appham.gimmerecipes.api
+package com.appham.gimmerecipes.model
 
-import com.appham.gimmerecipes.MvpContract
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import com.appham.gimmerecipes.presenter.MvpContract
 
 
 /**

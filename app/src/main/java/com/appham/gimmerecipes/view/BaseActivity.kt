@@ -1,9 +1,11 @@
-package com.appham.gimmerecipes
+package com.appham.gimmerecipes.view
 
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
-import com.appham.gimmerecipes.model.Recipe
-import com.appham.gimmerecipes.model.RecipesList
+import com.appham.gimmerecipes.presenter.MvpContract
+import com.appham.gimmerecipes.presenter.RecipesPresenter
+import com.appham.gimmerecipes.model.recipes.Recipe
+import com.appham.gimmerecipes.model.recipes.RecipesList
 
 abstract class BaseActivity : AppCompatActivity(), MvpContract.View {
 

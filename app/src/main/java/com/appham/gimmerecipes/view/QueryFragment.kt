@@ -1,17 +1,19 @@
-package com.appham.gimmerecipes
+package com.appham.gimmerecipes.view
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.appham.gimmerecipes.model.RecipesList
+import com.appham.gimmerecipes.model.recipes.RecipesList
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.TextView
 import android.view.MotionEvent
 import android.view.View.OnTouchListener
-import com.appham.gimmerecipes.model.Recipe
+import com.appham.gimmerecipes.presenter.MvpContract
+import com.appham.gimmerecipes.R
+import com.appham.gimmerecipes.model.recipes.Recipe
 
 
 /**

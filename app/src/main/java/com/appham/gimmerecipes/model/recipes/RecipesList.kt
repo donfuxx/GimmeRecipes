@@ -1,4 +1,4 @@
-package com.appham.gimmerecipes.model
+package com.appham.gimmerecipes.model.recipes
 
 import android.os.Parcel
 import android.os.Parcelable
@@ -19,7 +19,7 @@ class RecipesList() : Parcelable {
 
     constructor(parcel: Parcel) : this() {
         count = parcel.readValue(Int::class.java.classLoader) as? Int
-        recipes = parcel.createTypedArrayList(Recipe.CREATOR)
+        recipes = parcel.createTypedArrayList(Recipe)
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

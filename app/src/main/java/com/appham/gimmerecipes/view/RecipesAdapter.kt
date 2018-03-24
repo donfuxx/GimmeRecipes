@@ -1,4 +1,4 @@
-package com.appham.gimmerecipes
+package com.appham.gimmerecipes.view
 
 import android.animation.ObjectAnimator
 import android.content.Intent
@@ -13,7 +13,8 @@ import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.widget.ImageView
 import android.widget.TextView
-import com.appham.gimmerecipes.model.RecipesList
+import com.appham.gimmerecipes.R
+import com.appham.gimmerecipes.model.recipes.RecipesList
 import com.squareup.picasso.Picasso
 
 /**

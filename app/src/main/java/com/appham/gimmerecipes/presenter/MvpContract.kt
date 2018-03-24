@@ -1,9 +1,9 @@
-package com.appham.gimmerecipes
+package com.appham.gimmerecipes.presenter
 
-import com.appham.gimmerecipes.model.Recipe
-import com.appham.gimmerecipes.model.RecipeResponse
-import com.appham.gimmerecipes.model.RecipesList
-import com.appham.gimmerecipes.model.WitResponse
+import com.appham.gimmerecipes.model.recipes.Recipe
+import com.appham.gimmerecipes.model.recipes.RecipeResponse
+import com.appham.gimmerecipes.model.recipes.RecipesList
+import com.appham.gimmerecipes.model.wit.WitResponse
 
 /**
  * The interface that defines the Model View Presenter pattern

@@ -1,4 +1,4 @@
-package com.appham.gimmerecipes.model
+package com.appham.gimmerecipes.model.recipes
 
 import android.os.Parcel
 import android.os.Parcelable

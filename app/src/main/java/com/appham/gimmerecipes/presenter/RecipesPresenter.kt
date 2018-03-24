@@ -1,13 +1,14 @@
-package com.appham.gimmerecipes
+package com.appham.gimmerecipes.presenter
 
 import android.support.annotation.UiThread
 import android.util.Log
 import android.widget.Toast
-import com.appham.gimmerecipes.api.RecipesSource
-import com.appham.gimmerecipes.api.WitSource
-import com.appham.gimmerecipes.model.RecipeResponse
-import com.appham.gimmerecipes.model.RecipesList
-import com.appham.gimmerecipes.model.WitResponse
+import com.appham.gimmerecipes.model.recipes.RecipesSource
+import com.appham.gimmerecipes.model.wit.WitSource
+import com.appham.gimmerecipes.model.recipes.RecipeResponse
+import com.appham.gimmerecipes.model.recipes.RecipesList
+import com.appham.gimmerecipes.model.wit.WitResponse
+import com.appham.gimmerecipes.view.RecipesListFragment
 
 
 /**

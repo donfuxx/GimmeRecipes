@@ -1,9 +1,5 @@
-package com.appham.gimmerecipes.api
+package com.appham.gimmerecipes.model.recipes
 
-import com.appham.gimmerecipes.MvpContract
-import com.appham.gimmerecipes.model.Recipe
-import com.appham.gimmerecipes.model.RecipeResponse
-import com.appham.gimmerecipes.model.RecipesList
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -29,8 +25,8 @@ interface RecipesApi {
 
         const val BASE_URL = "http://food2fork.com/api/"
         const val KEY = "461990df5d8e47e63445351edfd44a83"
-        const val SEARCH_FEED = "search?key=$KEY"
-        const val GET_FEED = "get?key=$KEY"
+        const val SEARCH_FEED = "search?key=${KEY}"
+        const val GET_FEED = "get?key=${KEY}"
 
     }
 }

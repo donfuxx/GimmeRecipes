@@ -1,5 +1,7 @@
-package com.appham.gimmerecipes.api
+package com.appham.gimmerecipes.model
 
+import com.appham.gimmerecipes.model.recipes.RecipesApi
+import com.appham.gimmerecipes.model.wit.WitApi
 import okhttp3.Credentials
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

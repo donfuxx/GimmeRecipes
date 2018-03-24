@@ -1,4 +1,4 @@
-package com.appham.gimmerecipes.model
+package com.appham.gimmerecipes.model.wit
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
@@ -6,13 +6,10 @@ import com.google.gson.annotations.SerializedName
 /**
  * Generated pojo with http://www.jsonschema2pojo.org/ and converted to Kotlin
  */
-class Intent {
+class Entities {
 
-    @SerializedName("confidence")
+    @SerializedName("intent")
     @Expose
-    var confidence: Double? = null
-    @SerializedName("value")
-    @Expose
-    var value: String? = null
+    var intent: List<Intent>? = null
 
 }

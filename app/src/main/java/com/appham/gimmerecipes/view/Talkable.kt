@@ -1,4 +1,4 @@
-package com.appham.gimmerecipes
+package com.appham.gimmerecipes.view
 
 /**
  * @author thomas

@@ -1,4 +1,4 @@
-package com.appham.gimmerecipes
+package com.appham.gimmerecipes.view
 
 import android.os.Bundle
 import android.view.View
@@ -6,10 +6,13 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
-import com.appham.gimmerecipes.model.Recipe
+import com.appham.gimmerecipes.model.recipes.Recipe
 import com.squareup.picasso.Picasso
 import android.content.Intent
 import android.net.Uri
+import com.appham.gimmerecipes.presenter.MvpContract
+import com.appham.gimmerecipes.R
+import com.appham.gimmerecipes.presenter.RecipesPresenter
 
 
 class RecipeActivity : BaseActivity(), MvpContract.View {

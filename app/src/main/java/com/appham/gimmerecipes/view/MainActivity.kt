@@ -1,4 +1,4 @@
-package com.appham.gimmerecipes
+package com.appham.gimmerecipes.view
 
 import android.app.Activity
 import android.content.Intent
@@ -6,10 +6,11 @@ import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
-import android.widget.Toast
-import com.appham.gimmerecipes.model.Recipe
-import com.appham.gimmerecipes.model.RecipesList
+import com.appham.gimmerecipes.presenter.MvpContract
+import com.appham.gimmerecipes.R
+import com.appham.gimmerecipes.presenter.RecipesPresenter
+import com.appham.gimmerecipes.model.recipes.Recipe
+import com.appham.gimmerecipes.model.recipes.RecipesList
 
 class MainActivity : BaseActivity(), MvpContract.View, Talkable {
     val SPEECH_REQUEST_CODE = 1

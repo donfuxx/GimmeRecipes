@@ -1,10 +1,5 @@
-package com.appham.gimmerecipes.api
+package com.appham.gimmerecipes.model.wit
 
-import com.appham.gimmerecipes.MvpContract
-import com.appham.gimmerecipes.model.Recipe
-import com.appham.gimmerecipes.model.RecipeResponse
-import com.appham.gimmerecipes.model.RecipesList
-import com.appham.gimmerecipes.model.WitResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -18,7 +13,7 @@ import retrofit2.http.Query
 
 interface WitApi {
 
-    @Headers("Authorization: $USER $TOKEN")
+    @Headers("Authorization: ${USER} ${TOKEN}")
     @GET(MESSAGE_FEED)
     fun getEntities(@Query("q") q:String): Observable<WitResponse>
 
