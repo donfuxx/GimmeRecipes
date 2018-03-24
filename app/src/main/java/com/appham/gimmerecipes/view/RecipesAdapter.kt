@@ -36,7 +36,7 @@ class RecipesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             val recipe = recipesList.recipes?.get(position)
             holder.txtName.text = recipe?.title
             holder.txtDesc.text = holder.txtDesc.context.getString(R.string.recipe_id, recipe?.recipeId)
-            holder.txtCompany.text = recipe?.publisher
+            holder.txtSource.text = recipe?.publisher
 
             val context = holder.itemView.context
 
@@ -82,7 +82,7 @@ class RecipesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         val txtName: TextView = itemView.findViewById(R.id.txtName)
         val txtDesc: TextView = itemView.findViewById(R.id.txtDesc)
-        val txtCompany: TextView = itemView.findViewById(R.id.txtCompany)
+        val txtSource: TextView = itemView.findViewById(R.id.txtSource)
         val imgLogo: ImageView = itemView.findViewById(R.id.imgRecipes)
 
     }

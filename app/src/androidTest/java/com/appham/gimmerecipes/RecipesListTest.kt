@@ -6,21 +6,22 @@ import android.support.test.espresso.IdlingRegistry
 import android.support.test.espresso.action.ViewActions.pressImeActionButton
 import android.support.test.espresso.action.ViewActions.typeText
 import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
-import android.support.test.espresso.matcher.ViewMatchers.withId
+import android.support.test.espresso.contrib.RecyclerViewActions.scrollToPosition
+import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
+import android.support.v7.widget.RecyclerView
 import com.appham.gimmerecipes.utils.RecyclerViewItemCountAssertion
+import com.appham.gimmerecipes.utils.ViewActionUtils.atPosition
 import com.appham.gimmerecipes.utils.ViewIdlingResource
 import com.appham.gimmerecipes.view.MainActivity
+import org.hamcrest.CoreMatchers.containsString
 import org.hamcrest.CoreMatchers.not
-
-import org.junit.Test
-import org.junit.runner.RunWith
-
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
 
 /**
  * Instrumented test for the recipes list view, which will execute on an Android device.
@@ -36,7 +37,7 @@ class RecipesListTest {
 
     @Before
     fun setup() {
-        val progressBar = ViewIdlingResource(mActivityRule.getActivity().findViewById(R.id.progressBarList))
+        val progressBar = ViewIdlingResource(mActivityRule.activity.findViewById(R.id.progressBarList))
         IdlingRegistry.getInstance().register(progressBar)
     }
 
@@ -60,14 +61,25 @@ class RecipesListTest {
     @Test
     fun testSubmitEmptySearchShowsAllRecipes() {
         onView(withId(R.id.editQuery)).perform(typeText(""))
-        onView(withId(R.id.editQuery)).perform(pressImeActionButton());
+        onView(withId(R.id.editQuery)).perform(pressImeActionButton())
         onView(withId(R.id.listRecipes)).check(RecyclerViewItemCountAssertion(30))
     }
 
     @Test
     fun testSubmitGimmeRecipesSearchShowsAllRecipes() {
         onView(withId(R.id.editQuery)).perform(typeText("Gimme Recipes"))
-        onView(withId(R.id.editQuery)).perform(pressImeActionButton());
+        onView(withId(R.id.editQuery)).perform(pressImeActionButton())
         onView(withId(R.id.listRecipes)).check(RecyclerViewItemCountAssertion(30))
+    }
+
+    @Test
+    fun testSubmitPadThaiSearchShowsValidRecipes() {
+        onView(withId(R.id.editQuery)).perform(typeText("Show me some pad thai recipes!"))
+        onView(withId(R.id.editQuery)).perform(pressImeActionButton())
+
+        // check if title of first recipe contains "Pad Thai"
+        onView(withId(R.id.listRecipes))
+                .perform(scrollToPosition<RecyclerView.ViewHolder>(0))
+                .check(matches(atPosition(0, hasDescendant(withText(containsString("Pad Thai"))))))
     }
 }
