@@ -16,8 +16,8 @@ import com.appham.gimmerecipes.view.RecipesListFragment
  */
 class RecipesPresenter(val mView: MvpContract.View) : MvpContract.Presenter {
 
-    private val mRecipesSource: MvpContract.Model = RecipesSource()
-    private val mWitSource: MvpContract.Model = WitSource()
+    var mRecipesSource: MvpContract.Model = RecipesSource()
+    var mWitSource: MvpContract.Model = WitSource()
 
     override fun callRecipes() {
         mView.showLoadingBar(true)
