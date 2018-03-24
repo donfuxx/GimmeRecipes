@@ -76,6 +76,10 @@ class RecipesPresenter(val mView: MvpContract.View) : MvpContract.Presenter {
         val intents = wit.entities?.intent
         intents?.let {
             for (i in it) {
+                // recipes_get intent only matters if there are no specific keywords
+                if (it.size > 1 && i.value == "recipes_get") {
+                    continue
+                }
                 sb.append(i.value).append(",")
             }
         }
@@ -83,11 +87,11 @@ class RecipesPresenter(val mView: MvpContract.View) : MvpContract.Presenter {
 
         mView.showToast("'$q'", Toast.LENGTH_LONG)
 
-        when (q) {
-            "recipes_get" -> callRecipes("")
-            else -> {
-                callRecipes(q)
-            }
+        // show all recipes if 'recipes_get' detected
+        if (q == "recipes_get") {
+            callRecipes()
+        } else { // otherwise call recipes with keywords a query params
+            callRecipes(q)
         }
     }
 
