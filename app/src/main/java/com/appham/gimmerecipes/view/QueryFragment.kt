@@ -43,16 +43,7 @@ class QueryFragment : Fragment(), MvpContract.View, Queryable, Talkable {
         // on click on keyboard search button run the query
         editQuery?.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                refreshRecipes(RecipesList())
                 query(v.text.toString())
-
-                // Hide soft keyboard
-                activity?.currentFocus?.let {
-                    val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE)
-                            as InputMethodManager
-                    imm.hideSoftInputFromWindow(it.windowToken, 0)
-                }
-
 
                 return@OnEditorActionListener true
             }
@@ -63,12 +54,22 @@ class QueryFragment : Fragment(), MvpContract.View, Queryable, Talkable {
         //Handle click on microphone icon and record voice
         editQuery?.setOnTouchListener(OnTouchListener { v, event ->
             val DRAWABLE_RIGHT = 2
+            val DRAWABLE_LEFT = 0
 
             if (event.action == MotionEvent.ACTION_UP) {
+
+                // click on right microphone icon: record voice
                 if (event.rawX >= v.right - editQuery.compoundDrawables[DRAWABLE_RIGHT].bounds.width()) {
 
                     // record voice
                     recordVoice()
+                    return@OnTouchListener true
+
+                    // click on left search icon: search current query
+                } else if (event.rawX <= editQuery.compoundDrawables[DRAWABLE_LEFT].bounds.width()) {
+
+                    // search recipes by query
+                    query(editQuery.text.toString())
                     return@OnTouchListener true
                 }
             }
@@ -101,12 +102,25 @@ class QueryFragment : Fragment(), MvpContract.View, Queryable, Talkable {
     //endregion
 
     override fun query(q: String) {
+        refreshRecipes(RecipesList())
         presenter.callWit(q)
+        hideKeyboard()
     }
 
     override fun recordVoice() {
         activity?.let {
             (it as Talkable).recordVoice()
+        }
+    }
+
+    /**
+     * Hide soft keyboard
+     */
+    private fun hideKeyboard() {
+        activity?.currentFocus?.let {
+            val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE)
+                    as InputMethodManager
+            imm.hideSoftInputFromWindow(it.windowToken, 0)
         }
     }
 }
