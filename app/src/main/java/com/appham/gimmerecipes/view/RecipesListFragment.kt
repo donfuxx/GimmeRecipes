@@ -104,7 +104,9 @@ class RecipesListFragment : Fragment(), MvpContract.View, Queryable {
     }
 
     override fun showToast(msg: String, length: Int) {
-        (activity as MvpContract.View).showToast(msg, length)
+        activity?.let {
+            (it as MvpContract.View).showToast(msg, length)
+        }
     }
 
     override fun showLoadingBar(show: Boolean) {
