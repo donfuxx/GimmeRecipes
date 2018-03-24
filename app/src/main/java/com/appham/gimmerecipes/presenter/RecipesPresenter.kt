@@ -16,6 +16,7 @@ import com.appham.gimmerecipes.view.RecipesListFragment
  */
 class RecipesPresenter(val mView: MvpContract.View) : MvpContract.Presenter {
 
+    val RECIPES_GET = "recipes_get"
     var mRecipesSource: MvpContract.Model = RecipesSource()
     var mWitSource: MvpContract.Model = WitSource()
 
@@ -78,7 +79,7 @@ class RecipesPresenter(val mView: MvpContract.View) : MvpContract.Presenter {
         intents?.let {
             for (i in it) {
                 // recipes_get intent only matters if there are no specific keywords
-                if (it.size > 1 && i.value == "recipes_get") {
+                if (it.size > 1 && i.value == RECIPES_GET) {
                     continue
                 }
                 sb.append(i.value).append(",")
@@ -86,10 +87,12 @@ class RecipesPresenter(val mView: MvpContract.View) : MvpContract.Presenter {
         }
         val q = sb.replace(Regex(",$"), "") //remove last comma at end
 
-        mView.showToast("'$q'", Toast.LENGTH_LONG)
+        if (q.isNotEmpty()) {
+            mView.showToast("'$q'", Toast.LENGTH_LONG)
+        }
 
         // show all recipes if 'recipes_get' detected
-        if (q == "recipes_get") {
+        if (q == RECIPES_GET) {
             callRecipes()
         } else { // otherwise call recipes with keywords a query params
             callRecipes(q)
