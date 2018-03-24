@@ -54,8 +54,9 @@
             android:text="@string/see_instruction_at_source"
             android:ellipsize="end"
             android:singleLine="true"
-            android:drawableLeft="@android:drawable/ic_menu_info_details"
-            android:drawableStart="@android:drawable/ic_menu_info_details"
+            android:drawableLeft="@drawable/ic_link"
+            android:drawableStart="@drawable/ic_link"
+            android:drawablePadding="10dp"
             android:gravity="center"
             android:padding="10dp"
             />
