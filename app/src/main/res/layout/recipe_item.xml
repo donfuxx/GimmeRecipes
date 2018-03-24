@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cardRecipesItem"
+    style="@style/CardRecipesItem"
+    card_view:cardElevation="4dp"
+    card_view:contentPadding="4dp"
+    card_view:cardCornerRadius="10dp">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/layRecipesItem"
+                    style="@style/LayoutRecipesItem">
+
+        <TextView
+            android:id="@+id/txtName"
+            style="@style/TextRecipesName"/>
+
+        <LinearLayout
+            android:id="@+id/layRecipesContent"
+            style="@style/LayoutRecipesContent">
+
+            <ImageView
+                android:id="@+id/imgRecipes"
+                android:src="@android:drawable/btn_default"
+                style="@style/ImageRecipes"/>
+
+            <TextView
+                android:id="@+id/txtDesc"
+                android:text=""
+                style="@style/TextRecipesDesc"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtCompany"
+            style="@style/TextRecipesCompany"/>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

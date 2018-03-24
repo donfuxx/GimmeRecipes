@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Gimme Recipes</string>
+    <string name="delete_not_yet">Deleting the recipe from the backend not implemented yet!</string>
+    <string name="talk_to_me">Talk to me</string>
+    <string name="hungry">Hungry?</string>
+    <string name="see_instruction_at_source">See instructions at source</string>
+    <string name="image">image</string>
+    <string name="recipe_id">recipe id: %1$s</string>
+</resources>
