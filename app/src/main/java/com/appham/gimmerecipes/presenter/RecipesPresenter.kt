@@ -3,11 +3,11 @@ package com.appham.gimmerecipes.presenter
 import android.support.annotation.UiThread
 import android.util.Log
 import android.widget.Toast
-import com.appham.gimmerecipes.model.recipes.RecipesSource
-import com.appham.gimmerecipes.model.wit.WitSource
 import com.appham.gimmerecipes.model.recipes.RecipeResponse
 import com.appham.gimmerecipes.model.recipes.RecipesList
+import com.appham.gimmerecipes.model.recipes.RecipesSource
 import com.appham.gimmerecipes.model.wit.WitResponse
+import com.appham.gimmerecipes.model.wit.WitSource
 import com.appham.gimmerecipes.view.RecipesListFragment
 
 
@@ -70,12 +70,23 @@ class RecipesPresenter(val mView: MvpContract.View) : MvpContract.Presenter {
      */
     override fun onNext(wit: WitResponse) {
         mView.showLoadingBar(false)
-        val q = wit.entities?.intent?.get(0)?.value //TODO: get all entities values!
-        mView.showToast("Wit understood: "+q, Toast.LENGTH_LONG)
-        q?.let {
-            when (it) {
-                "recipes_get" -> callRecipes("")
-                else -> { callRecipes(it) }
+
+        // create comma separated String list
+        val sb = StringBuilder()
+        val intents = wit.entities?.intent
+        intents?.let {
+            for (i in it) {
+                sb.append(i.value).append(",")
+            }
+        }
+        val q = sb.replace(Regex(",$"), "") //remove last comma at end
+
+        mView.showToast("'$q'", Toast.LENGTH_LONG)
+
+        when (q) {
+            "recipes_get" -> callRecipes("")
+            else -> {
+                callRecipes(q)
             }
         }
     }

@@ -33,14 +33,14 @@ class RecipesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         if (holder is RecipesHolder) {
-            val recipe = recipesList.recipes?.get(position) //TODO: check null safety, (use let?)
+            val recipe = recipesList.recipes?.get(position)
             holder.txtName.text = recipe?.title
             holder.txtDesc.text = holder.txtDesc.context.getString(R.string.recipe_id, recipe?.recipeId)
             holder.txtCompany.text = recipe?.publisher
 
             val context = holder.itemView.context
 
-            if (recipe?.imageUrl != null) { //TODO: check null safety, (use let?)
+            if (recipe?.imageUrl != null) {
 
                 // rotating placeholder image
                 val placeholder = ContextCompat.getDrawable(context,

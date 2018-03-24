@@ -12,11 +12,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
-import com.appham.gimmerecipes.presenter.MvpContract
 import com.appham.gimmerecipes.R
-import com.appham.gimmerecipes.presenter.RecipesPresenter
 import com.appham.gimmerecipes.model.recipes.Recipe
 import com.appham.gimmerecipes.model.recipes.RecipesList
+import com.appham.gimmerecipes.presenter.MvpContract
+import com.appham.gimmerecipes.presenter.RecipesPresenter
 
 /**
  * @author thomas
@@ -28,16 +28,17 @@ class RecipesListFragment : Fragment(), MvpContract.View, Queryable {
     private lateinit var progressBar: ProgressBar
 
     val presenter: MvpContract.Presenter = RecipesPresenter(this)
-    companion object {
 
+    companion object {
         val TAG = "recipes-list-fragment"
         val RECIPES_LIST = "recipes-list"
     }
+
+    //region lifecycle methods
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_list, container, false)
     }
 
-    //region lifecycle methods
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         addQueryFragment()
@@ -93,6 +94,7 @@ class RecipesListFragment : Fragment(), MvpContract.View, Queryable {
     }
 
     override fun updateRecipeDetails(recipe: Recipe) {
+        TODO("not implemented")
     }
     //endregion
 
@@ -126,8 +128,7 @@ class RecipesListFragment : Fragment(), MvpContract.View, Queryable {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
                 //TODO: also delete from backend db
-                showToast(getString(R.string.delete_not_yet),
-                        Toast.LENGTH_LONG)
+                showToast(getString(R.string.delete_not_yet), Toast.LENGTH_LONG)
 
                 val pos = viewHolder.adapterPosition
                 recipesAdapter.recipesList.recipes?.removeAt(pos)
