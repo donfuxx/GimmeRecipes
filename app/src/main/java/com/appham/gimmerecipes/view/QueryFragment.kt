@@ -78,12 +78,9 @@ class QueryFragment : Fragment(), MvpContract.View, Queryable, Talkable {
         super.onViewCreated(view, savedInstanceState)
     }
 
+    //region MVP View methods
     override fun updateRecipeDetails(recipe: Recipe) {
         TODO("not implemented")
-    }
-
-    override fun query(q: String) {
-        presenter.callWit(q)
     }
 
     override fun refreshRecipes(recipesList: RecipesList) {
@@ -100,6 +97,11 @@ class QueryFragment : Fragment(), MvpContract.View, Queryable, Talkable {
 
     override fun activePresenter(): MvpContract.Presenter {
         return presenter
+    }
+    //endregion
+
+    override fun query(q: String) {
+        presenter.callWit(q)
     }
 
     override fun recordVoice() {

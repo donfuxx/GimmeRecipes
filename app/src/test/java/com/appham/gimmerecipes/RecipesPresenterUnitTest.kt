@@ -9,8 +9,6 @@ import com.appham.gimmerecipes.presenter.RecipesPresenter
 import com.nhaarman.mockito_kotlin.*
 import org.junit.Test
 
-import org.junit.Assert.*
-
 /**
  * Local RecipesPresenter unit test, which will execute on the development machine (host).
  *
@@ -28,7 +26,6 @@ class RecipesPresenterUnitTest {
         mPresenter.onNext(WitResponse())
 
         verify(mPresenter, never()).callRecipes(anyOrNull())
-
 
     }
 

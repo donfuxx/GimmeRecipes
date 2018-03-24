@@ -6,11 +6,12 @@ import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
-import com.appham.gimmerecipes.presenter.MvpContract
 import com.appham.gimmerecipes.R
-import com.appham.gimmerecipes.presenter.RecipesPresenter
 import com.appham.gimmerecipes.model.recipes.Recipe
 import com.appham.gimmerecipes.model.recipes.RecipesList
+import com.appham.gimmerecipes.presenter.MvpContract
+import com.appham.gimmerecipes.presenter.RecipesPresenter
+import kotlinx.android.synthetic.main.fragment_query.*
 
 class MainActivity : BaseActivity(), MvpContract.View, Talkable {
     val SPEECH_REQUEST_CODE = 1
@@ -38,8 +39,8 @@ class MainActivity : BaseActivity(), MvpContract.View, Talkable {
             if (requestCode == SPEECH_REQUEST_CODE) {
                 val speech = intent?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
                 speech?.let {
-//                    presenter.callRecipes(it[0])
                     presenter.callWit(it[0])
+                    editQuery?.setText(it[0])
                 }
             }
         }
