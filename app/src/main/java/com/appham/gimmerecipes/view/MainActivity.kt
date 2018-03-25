@@ -39,6 +39,7 @@ class MainActivity : BaseActivity(), MvpContract.View, Talkable {
             if (requestCode == SPEECH_REQUEST_CODE) {
                 val speech = intent?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
                 speech?.let {
+                    presenter.cancelRequest()
                     presenter.callWit(it[0])
                     editQuery?.setText(it[0])
                 }

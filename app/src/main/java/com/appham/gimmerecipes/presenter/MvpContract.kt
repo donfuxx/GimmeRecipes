@@ -4,6 +4,7 @@ import com.appham.gimmerecipes.model.recipes.Recipe
 import com.appham.gimmerecipes.model.recipes.RecipeResponse
 import com.appham.gimmerecipes.model.recipes.RecipesList
 import com.appham.gimmerecipes.model.wit.WitResponse
+import io.reactivex.disposables.Disposable
 
 /**
  * The interface that defines the Model View Presenter pattern
@@ -12,10 +13,10 @@ import com.appham.gimmerecipes.model.wit.WitResponse
 interface MvpContract {
 
     interface Model { //TODO: Maybe split into RecipesModel, WitModel etc. at some point
-        fun subscribeRecipes(presenter: Presenter)
-        fun subscribeRecipes(q: String, presenter: Presenter)
-        fun subscribeRecipe(id: String, presenter: Presenter)
-        fun subscribeWit(q: String, presenter: Presenter)
+        fun subscribeRecipes(presenter: Presenter): Disposable?
+        fun subscribeRecipes(q: String, presenter: Presenter): Disposable?
+        fun subscribeRecipe(id: String, presenter: Presenter): Disposable?
+        fun subscribeWit(q: String, presenter: Presenter): Disposable?
     }
 
     interface View { //TODO: Maybe split into ListView, DetailsView etc. at some point
@@ -35,6 +36,7 @@ interface MvpContract {
         fun onNext(recipe: RecipeResponse)
         fun onError(throwable: Throwable)
         fun onNext(wit: WitResponse)
+        fun cancelRequest()
     }
 
 }

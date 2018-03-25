@@ -9,6 +9,7 @@ import com.appham.gimmerecipes.model.recipes.RecipesSource
 import com.appham.gimmerecipes.model.wit.WitResponse
 import com.appham.gimmerecipes.model.wit.WitSource
 import com.appham.gimmerecipes.view.RecipesListFragment
+import io.reactivex.disposables.Disposable
 
 
 /**
@@ -19,25 +20,27 @@ class RecipesPresenter(val mView: MvpContract.View) : MvpContract.Presenter {
     val RECIPES_GET = "recipes_get"
     var mRecipesSource: MvpContract.Model = RecipesSource()
     var mWitSource: MvpContract.Model = WitSource()
+    var mRecipesDisposable: Disposable? = null
+    var mWitDisposable: Disposable? = null
 
     override fun callRecipes() {
         mView.showLoadingBar(true)
-        mRecipesSource.subscribeRecipes(this)
+        mRecipesDisposable = mRecipesSource.subscribeRecipes(this)
     }
 
     override fun callRecipes(q:String) {
         mView.showLoadingBar(true)
-        mRecipesSource.subscribeRecipes(q, this)
+        mRecipesDisposable = mRecipesSource.subscribeRecipes(q, this)
     }
 
     override fun callRecipe(id:String) {
         mView.showLoadingBar(true)
-        mRecipesSource.subscribeRecipe(id, this)
+        mRecipesDisposable = mRecipesSource.subscribeRecipe(id, this)
     }
 
     override fun callWit(q:String) {
         mView.showLoadingBar(true)
-        mWitSource.subscribeWit(q, this)
+        mWitDisposable = mWitSource.subscribeWit(q, this)
     }
 
     /**
@@ -109,6 +112,11 @@ class RecipesPresenter(val mView: MvpContract.View) : MvpContract.Presenter {
         mView.showToast(throwable.localizedMessage, Toast.LENGTH_LONG)
         mView.showLoadingBar(false)
         //TODO: show more user-friendly messages than just plain exception msg instead
+    }
+
+    override fun cancelRequest() {
+        mRecipesDisposable?.dispose()
+        mWitDisposable?.dispose()
     }
 
 }

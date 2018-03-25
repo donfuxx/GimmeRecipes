@@ -102,6 +102,7 @@ class QueryFragment : Fragment(), MvpContract.View, Queryable, Talkable {
     //endregion
 
     override fun query(q: String) {
+        presenter.cancelRequest()
         refreshRecipes(RecipesList())
         presenter.callWit(q)
         hideKeyboard()
