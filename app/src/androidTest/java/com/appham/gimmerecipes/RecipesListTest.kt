@@ -38,7 +38,7 @@ class RecipesListTest {
     @Before
     fun setup() {
         val progressBar = ViewIdlingResource(mActivityRule.activity.findViewById(R.id.progressBarList))
-        IdlingRegistry.getInstance().register(progressBar)
+        IdlingRegistry.getInstance().register(progressBar) //wait for loading spinner to disappear
     }
 
     @Test
