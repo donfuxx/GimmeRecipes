@@ -7,7 +7,16 @@ import com.appham.gimmerecipes.model.wit.WitResponse
 import com.appham.gimmerecipes.presenter.MvpContract
 import com.appham.gimmerecipes.presenter.RecipesPresenter
 import com.nhaarman.mockito_kotlin.*
+import io.reactivex.Scheduler
+import io.reactivex.android.plugins.RxAndroidPlugins
+import io.reactivex.disposables.Disposable
+import io.reactivex.internal.schedulers.ExecutorScheduler
+import io.reactivex.plugins.RxJavaPlugins
+import org.junit.Before
 import org.junit.Test
+import java.util.concurrent.Executor
+import java.util.concurrent.TimeUnit
+
 
 /**
  * Local RecipesPresenter unit test, which will execute on the development machine (host).
@@ -20,12 +29,35 @@ class RecipesPresenterUnitTest {
     val mPresenter: RecipesPresenter = spy(RecipesPresenter(mView))
     val mRecipesSource: RecipesSource = mock()
 
+    var immediate: Scheduler = object : Scheduler() {
+        override fun scheduleDirect(run: Runnable, delay: Long, unit: TimeUnit): Disposable {
+            // this prevents StackOverflowErrors when scheduling with a delay
+            return super.scheduleDirect(run, 0, unit)
+        }
+
+        override fun createWorker(): Worker {
+            return ExecutorScheduler.ExecutorWorker(Executor { it.run() })
+        }
+    }
+
+    /**
+     * Set schedulers to the test scheduler
+     */
+    @Before
+    fun setup() {
+        RxJavaPlugins.setInitIoSchedulerHandler { scheduler -> immediate }
+        RxJavaPlugins.setInitComputationSchedulerHandler { scheduler -> immediate }
+        RxJavaPlugins.setInitNewThreadSchedulerHandler { scheduler -> immediate }
+        RxJavaPlugins.setInitSingleSchedulerHandler { scheduler -> immediate }
+        RxAndroidPlugins.setInitMainThreadSchedulerHandler { scheduler -> immediate }
+    }
+
     @Test
-    fun testOnNextWitWithEmptyResponseDoesNotCallRecipes() {
+    fun testOnNextWitWithEmptyResponseDoesNotCallRecipesWithQuery() {
 
         mPresenter.onNext(WitResponse())
 
-        verify(mPresenter, never()).callRecipes(anyOrNull())
+        verify(mPresenter, never()).callRecipes(any())
 
     }
 

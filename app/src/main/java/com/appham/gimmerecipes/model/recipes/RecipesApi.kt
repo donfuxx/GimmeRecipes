@@ -25,8 +25,8 @@ interface RecipesApi {
 
         const val BASE_URL = "http://food2fork.com/api/"
         const val KEY = "461990df5d8e47e63445351edfd44a83"
-        const val SEARCH_FEED = "search?key=${KEY}"
-        const val GET_FEED = "get?key=${KEY}"
+        const val SEARCH_FEED = "search?key=$KEY"
+        const val GET_FEED = "get?key=$KEY"
 
     }
 }

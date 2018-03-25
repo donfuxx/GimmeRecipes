@@ -54,7 +54,7 @@ class Recipe() : Parcelable {
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(publisher)
         parcel.writeString(f2fUrl)
-        parcel.writeList(ingredients);
+        parcel.writeList(ingredients)
         parcel.writeString(title)
         parcel.writeString(sourceUrl)
         parcel.writeString(recipeId)

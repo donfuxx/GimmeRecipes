@@ -1,5 +1,6 @@
 package com.appham.gimmerecipes.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -27,7 +28,7 @@ class QueryFragment : Fragment(), MvpContract.View, Queryable, Talkable {
     lateinit var presenter: MvpContract.Presenter
 
     companion object {
-        val TAG = "query-fragment"
+        const val TAG = "query-fragment"
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -36,6 +37,7 @@ class QueryFragment : Fragment(), MvpContract.View, Queryable, Talkable {
         return inflater.inflate(R.layout.fragment_query, container, false)
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         val editQuery: EditText? = view.findViewById(R.id.editQuery)

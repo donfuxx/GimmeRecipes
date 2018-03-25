@@ -2,7 +2,6 @@ package com.appham.gimmerecipes.model
 
 import com.appham.gimmerecipes.model.recipes.RecipesApi
 import com.appham.gimmerecipes.model.wit.WitApi
-import okhttp3.Credentials
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -84,21 +83,6 @@ object ApiFactory {
     private fun createOkHttp(): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-        return OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)
-                .build()
-    }
-
-    /**
-     * Create a OkHttpClient for Wit with authentication
-     */
-    private fun createOkHttpWit(): OkHttpClient {
-
-        val credentials = Credentials.basic(WitApi.USER, WitApi.TOKEN);
-
-        val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-
         return OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
                 .build()

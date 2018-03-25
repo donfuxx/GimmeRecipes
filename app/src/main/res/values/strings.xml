@@ -6,4 +6,5 @@
     <string name="see_instruction_at_source">See instructions at source</string>
     <string name="image">image</string>
     <string name="recipe_id">recipe id: %1$s</string>
+    <string name="recipe">Recipe</string>
 </resources>

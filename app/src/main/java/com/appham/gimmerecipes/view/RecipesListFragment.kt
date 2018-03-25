@@ -30,8 +30,8 @@ class RecipesListFragment : Fragment(), MvpContract.View, Queryable {
     val presenter: MvpContract.Presenter = RecipesPresenter(this)
 
     companion object {
-        val TAG = "recipes-list-fragment"
-        val RECIPES_LIST = "recipes-list"
+        const val TAG = "recipes-list-fragment"
+        const val RECIPES_LIST = "recipes-list"
     }
 
     //region lifecycle methods

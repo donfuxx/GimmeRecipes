@@ -1,14 +1,12 @@
 package com.appham.gimmerecipes.presenter
 
 import android.support.annotation.UiThread
-import android.util.Log
 import android.widget.Toast
 import com.appham.gimmerecipes.model.recipes.RecipeResponse
 import com.appham.gimmerecipes.model.recipes.RecipesList
 import com.appham.gimmerecipes.model.recipes.RecipesSource
 import com.appham.gimmerecipes.model.wit.WitResponse
 import com.appham.gimmerecipes.model.wit.WitSource
-import com.appham.gimmerecipes.view.RecipesListFragment
 import io.reactivex.disposables.Disposable
 
 
@@ -64,13 +62,11 @@ class RecipesPresenter(val mView: MvpContract.View) : MvpContract.Presenter {
         mView.showLoadingBar(false)
 
         mView.refreshRecipes(recipesList)
-
-        Log.i(RecipesListFragment.TAG, "${recipesList.recipes?.size} recipes loaded")
     }
 
     /**
      * Call recipes API by query after Wit API call finished with success.
-     * @param recipesList
+     * @param wit
      */
     @UiThread
     override fun onNext(wit: WitResponse) {
@@ -94,10 +90,10 @@ class RecipesPresenter(val mView: MvpContract.View) : MvpContract.Presenter {
             mView.showToast("'$q'", Toast.LENGTH_LONG)
         }
 
-        // show all recipes if 'recipes_get' detected
-        if (q == RECIPES_GET) {
+        // show all recipes if 'recipes_get' detected or q is blank
+        if (q == RECIPES_GET || q.isBlank()) {
             callRecipes()
-        } else { // otherwise call recipes with keywords a query params
+        } else { // otherwise call recipes with keywords as query params
             callRecipes(q)
         }
     }

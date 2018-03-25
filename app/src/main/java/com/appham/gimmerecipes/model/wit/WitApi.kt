@@ -13,7 +13,7 @@ import retrofit2.http.Query
 
 interface WitApi {
 
-    @Headers("Authorization: ${USER} ${TOKEN}")
+    @Headers("Authorization: $USER $TOKEN")
     @GET(MESSAGE_FEED)
     fun getEntities(@Query("q") q:String): Observable<WitResponse>
 
@@ -22,7 +22,6 @@ interface WitApi {
         const val BASE_URL = "https://api.wit.ai/"
         const val TOKEN = "HUX6XDY6HJU3UOFMKJUARRNENDQBYAGQ"
         const val USER = "Bearer"
-        const val APP_ID = "5ab3de67-435b-4aa9-956a-d8257ae6270c"
         const val MESSAGE_FEED = "message"
 
     }

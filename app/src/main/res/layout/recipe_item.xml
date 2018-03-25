@@ -23,7 +23,8 @@
             <ImageView
                 android:id="@+id/imgRecipes"
                 android:src="@android:drawable/btn_default"
-                style="@style/ImageRecipes"/>
+                style="@style/ImageRecipes"
+                android:contentDescription="@string/recipe"/>
 
             <TextView
                 android:id="@+id/txtDesc"
