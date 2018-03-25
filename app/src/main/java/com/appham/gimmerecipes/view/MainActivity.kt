@@ -17,6 +17,8 @@ class MainActivity : BaseActivity(), MvpContract.View, Talkable {
     val SPEECH_REQUEST_CODE = 1
 
     private lateinit var presenter: MvpContract.Presenter
+
+    //region lifecycle methods
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -46,7 +48,9 @@ class MainActivity : BaseActivity(), MvpContract.View, Talkable {
             }
         }
     }
+    //endregion
 
+    //region MVP view methods
     override fun showLoadingBar(show: Boolean) {
         val recipesListFragment = fragmentManager.findFragmentByTag(RecipesListFragment.TAG) as RecipesListFragment?
         recipesListFragment?.showLoadingBar(show)
@@ -63,6 +67,7 @@ class MainActivity : BaseActivity(), MvpContract.View, Talkable {
     override fun activePresenter(): MvpContract.Presenter {
         return presenter
     }
+    //endregion
 
     override fun recordVoice() {
         val DIALOG_TEXT = getString(R.string.talk_to_me)

@@ -1,18 +1,18 @@
 package com.appham.gimmerecipes.view
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
-import com.appham.gimmerecipes.model.recipes.Recipe
-import com.squareup.picasso.Picasso
-import android.content.Intent
-import android.net.Uri
-import com.appham.gimmerecipes.presenter.MvpContract
 import com.appham.gimmerecipes.R
+import com.appham.gimmerecipes.model.recipes.Recipe
+import com.appham.gimmerecipes.presenter.MvpContract
 import com.appham.gimmerecipes.presenter.RecipesPresenter
+import com.squareup.picasso.Picasso
 
 
 class RecipeActivity : BaseActivity(), MvpContract.View {
@@ -21,6 +21,7 @@ class RecipeActivity : BaseActivity(), MvpContract.View {
 
     private lateinit var mProgressBar: ProgressBar
 
+    //region lifecycle methods
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipe)
@@ -41,7 +42,9 @@ class RecipeActivity : BaseActivity(), MvpContract.View {
         }
 
     }
+    //endregion
 
+    //region MVP View methods
     override fun showLoadingBar(show: Boolean) {
         mProgressBar.visibility = if (show) View.VISIBLE else View.GONE
     }
@@ -66,6 +69,7 @@ class RecipeActivity : BaseActivity(), MvpContract.View {
 
         }
     }
+    //endregion
 
     /**
      * Set view text and image from Recipe object

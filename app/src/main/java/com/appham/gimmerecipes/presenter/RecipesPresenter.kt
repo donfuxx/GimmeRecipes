@@ -17,9 +17,9 @@ class RecipesPresenter(val mView: MvpContract.View) : MvpContract.Presenter {
 
     val RECIPES_GET = "recipes_get"
     var mRecipesSource: MvpContract.Model = RecipesSource()
-    var mWitSource: MvpContract.Model = WitSource()
-    var mRecipesDisposable: Disposable? = null
-    var mWitDisposable: Disposable? = null
+    private var mWitSource: MvpContract.Model = WitSource()
+    private var mRecipesDisposable: Disposable? = null
+    private var mWitDisposable: Disposable? = null
 
     override fun callRecipes() {
         mView.showLoadingBar(true)

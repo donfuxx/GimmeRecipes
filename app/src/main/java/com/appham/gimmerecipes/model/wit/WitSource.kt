@@ -9,6 +9,7 @@ import io.reactivex.schedulers.Schedulers
 
 
 /**
+ * The source of the wit data retrieved from the api
  * @author thomas
  */
 class WitSource : BaseSource() {

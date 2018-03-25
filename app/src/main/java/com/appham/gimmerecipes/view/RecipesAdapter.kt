@@ -88,7 +88,6 @@ class RecipesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     companion object {
-
         const val RECIPE = "recipe"
     }
 }

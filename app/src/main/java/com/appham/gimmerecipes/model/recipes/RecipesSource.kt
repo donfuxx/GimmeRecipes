@@ -9,9 +9,10 @@ import io.reactivex.schedulers.Schedulers
 
 
 /**
+ * The source of the recipes data retrieved from the api
  * @author thomas
  */
-class RecipesSource : BaseSource() { //TODO: move to model package?
+class RecipesSource : BaseSource() {
 
     override fun subscribeRecipes(presenter: MvpContract.Presenter): Disposable? {
         val recipesApi = ApiFactory.createRecipesApi()
