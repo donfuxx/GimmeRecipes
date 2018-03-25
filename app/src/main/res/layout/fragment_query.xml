@@ -6,7 +6,7 @@
 
     <EditText
         android:id="@+id/editQuery"
-        android:imeOptions="actionSearch"
+        android:imeOptions="actionSearch|flagNoExtractUi"
         android:inputType="text"
         android:singleLine="true"
         android:hint="@string/hungry"

@@ -68,6 +68,7 @@ class RecipesListFragment : Fragment(), MvpContract.View, Queryable {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
+        presenter.cancelRequest()
         outState.putParcelable(RECIPES_LIST, recipesAdapter.recipesList)
         super.onSaveInstanceState(outState)
     }
