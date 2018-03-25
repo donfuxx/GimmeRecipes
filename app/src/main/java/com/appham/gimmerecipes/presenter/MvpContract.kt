@@ -27,7 +27,7 @@ interface MvpContract {
         fun updateRecipeDetails(recipe: Recipe)
     }
 
-    interface Presenter {
+    interface Presenter { //TODO: Maybe split at some point..
         fun callRecipes()
         fun callRecipes(q:String)
         fun callRecipe(id: String)
