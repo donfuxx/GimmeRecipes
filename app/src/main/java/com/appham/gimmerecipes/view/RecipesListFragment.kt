@@ -81,7 +81,7 @@ class RecipesListFragment : Fragment(), MvpContract.View, Queryable {
     }
 
     override fun showToast(msg: String, length: Int) {
-        activity?.let {
+        activity?.let { //Kotlin-style null-safe call
             (it as MvpContract.View).showToast(msg, length)
         }
     }
@@ -124,7 +124,6 @@ class RecipesListFragment : Fragment(), MvpContract.View, Queryable {
             override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
                 return false
             }
-
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
