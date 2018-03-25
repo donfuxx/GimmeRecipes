@@ -79,5 +79,25 @@ class RecipesPresenterUnitTest {
 
     }
 
+    @Test
+    fun testOnNextWitWithMultiResponseDoesCallRecipes() {
+
+        // a valid "thai,curry" wit response
+        val witResponse = WitResponse()
+        witResponse.entities = Entities()
+        val testIntent = Intent()
+        testIntent.value = "thai"
+        val testIntent2 = Intent()
+        testIntent2.value = "curry"
+        witResponse.entities?.intent = mutableListOf(testIntent, testIntent2)
+
+        mPresenter.mRecipesSource = mRecipesSource
+
+        mPresenter.onNext(witResponse)
+
+        verify(mPresenter).callRecipes("thai,curry")
+
+    }
+
     //TODO: add more tests, maybe implement dependency injection framework like dagger2
 }
