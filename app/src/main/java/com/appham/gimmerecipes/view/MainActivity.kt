@@ -70,9 +70,8 @@ class MainActivity : BaseActivity(), MvpContract.View, Talkable {
     //endregion
 
     override fun recordVoice() {
-        val DIALOG_TEXT = getString(R.string.talk_to_me)
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, DIALOG_TEXT)
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.talk_to_me))
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
         intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, SPEECH_REQUEST_CODE)
