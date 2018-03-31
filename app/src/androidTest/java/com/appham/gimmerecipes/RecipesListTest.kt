@@ -11,17 +11,19 @@ import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import android.support.v7.widget.RecyclerView
+import android.widget.EditText
+import android.widget.SearchView
 import com.appham.gimmerecipes.utils.RecyclerViewItemCountAssertion
 import com.appham.gimmerecipes.utils.ViewActionUtils.atPosition
 import com.appham.gimmerecipes.utils.ViewIdlingResource
 import com.appham.gimmerecipes.view.MainActivity
-import org.hamcrest.CoreMatchers.containsString
-import org.hamcrest.CoreMatchers.not
+import org.hamcrest.CoreMatchers.*
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+
 
 /**
  * Instrumented test for the recipes list view, which will execute on an Android device.
@@ -50,7 +52,7 @@ class RecipesListTest {
 
     @Test
     fun testEditQueryFieldDisplayed() {
-        onView(withId(R.id.editQuery)).check(matches(isDisplayed()))
+        onView(withId(R.id.searchQuery)).check(matches(isDisplayed()))
     }
 
     @Test
@@ -59,23 +61,20 @@ class RecipesListTest {
     }
 
     @Test
-    fun testSubmitEmptySearchShowsAllRecipes() {
-        onView(withId(R.id.editQuery)).perform(typeText(""))
-        onView(withId(R.id.editQuery)).perform(pressImeActionButton())
-        onView(withId(R.id.listRecipes)).check(RecyclerViewItemCountAssertion(30))
+    fun testSubmitEmptySearchShowsZeroRecipes() {
+        performTextSearch("")
+        onView(withId(R.id.listRecipes)).check(RecyclerViewItemCountAssertion(0))
     }
 
     @Test
     fun testSubmitGimmeRecipesSearchShowsAllRecipes() {
-        onView(withId(R.id.editQuery)).perform(typeText("Gimme Recipes"))
-        onView(withId(R.id.editQuery)).perform(pressImeActionButton())
+        performTextSearch("Gimme Recipes!")
         onView(withId(R.id.listRecipes)).check(RecyclerViewItemCountAssertion(30))
     }
 
     @Test
     fun testSubmitPadThaiSearchShowsValidRecipes() {
-        onView(withId(R.id.editQuery)).perform(typeText("Show me some pad thai recipes!"))
-        onView(withId(R.id.editQuery)).perform(pressImeActionButton())
+        performTextSearch("Show me some pad thai recipes!")
 
         // check if title of first recipe contains "Pad Thai"
         onView(withId(R.id.listRecipes))
@@ -85,8 +84,7 @@ class RecipesListTest {
 
     @Test
     fun testClickRecipeOpensDetails() {
-        onView(withId(R.id.editQuery)).perform(typeText("I really need a pizza!"))
-        onView(withId(R.id.editQuery)).perform(pressImeActionButton())
+        performTextSearch("I really need a pizza!")
 
         // click first recipe item
         onView(withId(R.id.listRecipes)).perform(
@@ -95,5 +93,16 @@ class RecipesListTest {
 
         // check if details page displayed
         onView(withId(R.id.imgRecipeDetails)).check(matches(isDisplayed()))
+    }
+
+    /**
+     * Type a query and submit search by click on keyboard action button
+     */
+    private fun performTextSearch(q:String) {
+        onView(allOf(withId(R.id.searchQuery),
+                anyOf(supportsInputMethods(), isAssignableFrom(SearchView::class.java))))
+                .perform(typeText(q))
+        onView(isAssignableFrom(EditText::class.java))
+                .perform(pressImeActionButton())
     }
 }

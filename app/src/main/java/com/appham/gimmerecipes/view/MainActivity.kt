@@ -43,7 +43,7 @@ class MainActivity : BaseActivity(), MvpContract.View, Talkable {
                 speech?.let {
                     presenter.cancelRequest()
                     presenter.callWit(it[0])
-                    editQuery?.setText(it[0])
+                    searchQuery?.setQuery(it[0], false)
                 }
             }
         }

@@ -1,18 +1,13 @@
 package com.appham.gimmerecipes.view
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
-import android.view.View.OnTouchListener
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.TextView
+import android.widget.SearchView
 import com.appham.gimmerecipes.R
 import com.appham.gimmerecipes.model.recipes.Recipe
 import com.appham.gimmerecipes.model.recipes.RecipesList
@@ -37,45 +32,24 @@ class QueryFragment : Fragment(), MvpContract.View, Queryable, Talkable {
         return inflater.inflate(R.layout.fragment_query, container, false)
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        val editQuery: EditText? = view.findViewById(R.id.editQuery)
+        val searchView : SearchView? = view.findViewById(R.id.searchQuery)
+        searchView?.setIconifiedByDefault(false)
+        searchView?.isSubmitButtonEnabled = true
 
         // on click on keyboard search button run the query
-        editQuery?.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                query(v.text.toString())
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
-                return@OnEditorActionListener true
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
             }
-            false
-        })
 
-        //TODO: make Android Lint happy about not having overriden performClick()
-        //Handle click on microphone icon and record voice
-        editQuery?.setOnTouchListener(OnTouchListener { v, event ->
-            val DRAWABLE_RIGHT = 2
-            val DRAWABLE_LEFT = 0
-
-            if (event.action == MotionEvent.ACTION_UP) {
-
-                // click on right microphone icon: record voice
-                if (event.rawX >= v.right - editQuery.compoundDrawables[DRAWABLE_RIGHT].bounds.width()) {
-
-                    // record voice
-                    recordVoice()
-                    return@OnTouchListener true
-
-                    // click on left search icon: search current query
-                } else if (event.rawX <= editQuery.compoundDrawables[DRAWABLE_LEFT].bounds.width()) {
-
-                    // search recipes by query
-                    query(editQuery.text.toString())
-                    return@OnTouchListener true
-                }
+            override fun onQueryTextSubmit(q: String): Boolean {
+                query(q)
+                return false
             }
-            false
+
         })
 
         super.onViewCreated(view, savedInstanceState)

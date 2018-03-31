@@ -4,18 +4,13 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/editQuery"
+    <android.widget.SearchView
+        android:id="@+id/searchQuery"
         android:imeOptions="actionSearch|flagNoExtractUi"
         android:inputType="text"
         android:singleLine="true"
         android:hint="@string/hungry"
         android:textSize="30sp"
-        android:drawableLeft="@drawable/ic_search"
-        android:drawableStart="@drawable/ic_search"
-        android:drawableRight="@drawable/ic_microphone"
-        android:drawableEnd="@drawable/ic_microphone"
-        android:drawablePadding="10dp"
         android:layout_margin="4dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
